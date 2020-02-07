@@ -1,0 +1,31 @@
+//https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1
+
+
+void util ( int r , int c , string s , int m[MAX][MAX] , int visit [MAX][MAX] , vector < string > &v, int n  )
+{
+    if ( r < 0 or c < 0 or r >=n or c >= n  or m [ r ] [ c ] == 0 or visit [ r ] [ c ] ==1 )
+        return ; 
+    
+    if ( r == n - 1 and  c == n - 1 )
+    {
+        v.push_back ( s ) ; 
+        return ; 
+    }
+    visit [ r ] [ c ] = 1 ; 
+    util ( r , c  + 1 ,s + 'R' , m , visit , v , n  ) ; 
+    util ( r + 1 , c , s + 'D' , m , visit , v , n) ; 
+    util ( r - 1 , c , s + 'U', m , visit , v  , n) ; 
+    util ( r , c - 1 , s + 'L' , m , visit , v , n) ;
+    visit [ r ] [ c ] = 0 ; 
+}
+vector<string> printPath(int m[MAX][MAX], int n)
+{
+    int visit [ MAX] [ MAX] ;
+    string s ; 
+    vector < string > v ; 
+    memset ( visit , 0 , sizeof ( visit ) ) ; 
+    util ( 0 , 0 , s , m , visit , v ,n ) ;
+    sort ( v.begin() , v.end() ) ; 
+    return v ; 
+    //Your code here	
+}
