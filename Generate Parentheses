@@ -1,0 +1,35 @@
+/https://leetcode.com/problems/generate-parentheses/
+
+
+class Solution {
+public:
+    
+    void util ( string s , int open , int close , vector < string > &v , int n )
+    {
+       if (s.length() == 2* n )
+       {
+           v.push_back ( s ) ; 
+           return ; 
+       }
+        
+        
+        if ( open > close )
+        {
+            util ( s + ')' , open , close + 1 , v , n ); 
+        }
+        if ( open < n )
+        {
+            util ( s + '(' , open  + 1 , close , v , n ) ; 
+        }
+    }
+    vector<string> generateParenthesis(int n) {
+        
+    
+        string s = "(" ; 
+        vector < string > v ; 
+        
+      util ( s , 1 , 0 , v , n ) ;
+        return v; 
+        
+    }
+};
